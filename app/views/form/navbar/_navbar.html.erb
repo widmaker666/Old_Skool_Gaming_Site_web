@@ -1,0 +1,87 @@
+  <nav class="navbar navbar-light navbar-expand-lg sticky-top bg-hugo border-bottom border-dark border-2 shadow-0">
+    <div class="container">
+      <% #= image_tag "https://i.gifer.com/4dg6.gif", class:"img-fluid", style:"height: 4rem" %>
+      <a class="navbar-brand text-dark font-weight-bolder ms-sm-3" href="/"><%= image_tag "https://trello.com/1/cards/6399fa95aec8c101108d9153/attachments/6399fabfb0018a0319c71b26/previews/6399fac4b0018a0319c71d5a/download/Blanc_avec_Triangles_Color%C3%A9s_Internet_Logo.gif", class:"img-fluid", style:"height: 4rem" %><%= link_to " OLD SKOOL GAMING ", root_path, class: "nav-link active fw-bold" %></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+        <ul class="navbar-nav me-auto mb-lg-0">          
+          <li class="nav-item">
+            <%= link_to "À PROPOS ", old_path, class: "nav-link active" %>
+          </li>                 
+        </ul>
+  <% if current_user %>
+    <div class="d-flex">
+
+      <ul class="navbar-nav me-auto  mb-lg-0">
+        <li class="nav-item dropdown mt-2 mb-2">
+          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, alt: 'avatar', style: "height: 32px; width: 32px", class:"rounded-circle" %>
+          <% else %>
+            <%= image_tag "https://cdn-icons-png.flaticon.com/512/3607/3607444.png", style: "height: 32px" %>
+          <% end %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-light border border-2 border-dark rounded-0" aria-labelledby="navbarDarkDropdownMenuLink">
+            <% if current_user.admin == true %>
+      <li class="dropdown-item">
+        <%= link_to "Admin", user_index_path, class: "text-dark" %>
+      </li>
+      <% end %>
+            <li class="dropdown-item">
+        <%= link_to "Mon compte", user_path(current_user), class: "text-dark" %>
+      </li>
+      <li class="dropdown-item">
+        <%= link_to "Mon panier / #{current_user.cart.total.to_f}0 €", user_carts_path(current_user), class: "text-dark" %>
+      </li>
+            <li class="dropdown-item">
+        <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark rounded-0 border-2 btn-sm mb-0" %>
+      </li>
+            
+          </ul>
+        </li>
+        
+      <li class="nav-item">
+        <%= link_to "Vends tes articles", new_article_path, class: "mt-3 btn btn-sm btn-primary rounded-0 mb-0" %>
+        </li>
+      </ul>
+      
+    </ul>
+    </div>
+  <% else %>
+  <div class="collapse navbar-collapse" id="navbarsExample07">
+      
+      </div>
+  
+    <div class="dropdown d-flex mt-3">
+      <ul class="navbar-nav me-auto mx-auto">
+        <li>
+  <button class="btn btn-sm btn-outline-dark rounded-0 border-2 dropdown-toggle mx-3" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    S'inscrire | Se connecter
+  </button>
+  <ul class="dropdown-menu dropdown-menu-light border border-2 border-dark rounded-0" aria-labelledby="dropdownMenuButton1">
+    <li class="dropdown-item">
+        <%= link_to "S'inscrire", new_user_registration_path, class: "text-dark" %>
+      </li>
+    <li class="dropdown-item ">
+        <%= link_to "Connexion", new_user_session_path, class: "text-dark" %>
+      </li>
+  </ul>
+</li>
+
+
+      <li class="nav-item">
+        <%= link_to "Vends tes articles", new_user_session_path, class: "btn btn-sm btn-primary rounded-0" %>
+        </li>
+      </ul>
+
+
+    </div>
+  <% end %>
+
+  
+      </div>
+    </div>
+  </nav>

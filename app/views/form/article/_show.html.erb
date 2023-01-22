@@ -1,0 +1,48 @@
+<% if current_user == @article.seller %>
+<section class="bg-mainos">
+  <div class="container pt-5 pb-5">
+    <div class="card">
+      <div class="card-body rounded-0 border border-2 border-dark card-box">
+        <p class="lead text-dark">Ajoute des photos</P>
+          <div class="d-flex justify-content-between text-center align-items-center">
+            <%= form_tag article_images_path(@article), multipart: true do %>
+      <%= file_field_tag :images, class:"btn btn-outline-dark border-2 rounded-0" %>
+      <%= submit_tag "Valider la photo", class:"btn btn-primary rounded-0" %>
+    <% end %>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<div class="container px-4 py-5" id="featured-3">
+    <div class="row center">
+
+    <% if @article.images.attached? %>
+        <% i = 0 %> <!-- Ce sera l'ID de l'image dans le tableau d'image -->
+
+        <% @article.images.each do |image|%>
+        <div class="col-lg-6 col-md-6"> 
+            <div class="col">    
+                <%= image_tag image, alt: 'avatar', class: "img-fluid border border-2 border-dark bg-white img" %> 
+            </div>
+        <div class="col">  
+        <% if @article.seller == current_user %>
+          <%= button_to "Supprimer la photo", article_image_path(@article.id, image.id, task_id: i), method: :delete, class:"btn btn-outline-dark border-2 rounded-0" %>
+        <% end %>
+            <% i = i + 1 %>
+        </div> 
+      </div>
+    <% end %> 
+    </div>
+</div>    
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>

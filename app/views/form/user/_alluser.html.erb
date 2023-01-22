@@ -1,0 +1,40 @@
+<div class="container bg-white mt-6 border border-2 border-dark">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-flex">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr>
+            <% @user.each do |user| %>            
+            <th scope="row"><%= user.id %></th>
+            
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.admin %></td>
+            <td>
+            <div class= "d-flex justify-content space-between">
+            <%= button_to " Powerrr", user_path(user, user_id: user.id), method: :put, class: "btn btn-sm bg-gradient-success " %>
+            
+            <%= button_to " Modifier l'utilisateur", edit_user_path(user), method: :get, class: "btn btn-sm bg-gradient-secondary " %>
+
+            <%= button_to " Supprimer l'utilisateur", user_path(user, user_id: user.id), method: :delete, class: "btn btn-sm bg-gradient-danger " %>
+            </div>
+            </td>
+          </tr>  
+        <% end %>   
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

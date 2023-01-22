@@ -1,0 +1,73 @@
+<div class="bg-mainos2 pt-5 pb-5">
+<div class="container">
+<p class="text-uppercase font-weight-bold"></p>
+<div class="position-relative overflow-hidden shadow-lg bg-white border border-2 border-dark ">
+
+<% # Hero page %>
+<!-- -------- START HEADER 1 w/ text and image on right ------- -->
+  <header>
+    <div class="page-header min-vh-100">
+      <div class="oblique position-absolute top-0 h-100 d-md-block d-none">
+        <div>
+        <%= image_tag("hero.jpg", height: 850) %>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <div class="pt-5 col-lg-10 col-md-7 d-flex justify-content-center flex-column">
+             <div class="text-center text-gradient text-primary">
+<h2>Connexion</h2>
+</div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+     
+        
+       
+
+            <div class="text-center">
+              <img src="https://i.pinimg.com/736x/0a/ef/40/0aef407e30d3c372ba775a325902ced5.jpg" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                width="200px" alt="profile">
+            </div>
+            <div class="text-center ">      
+              
+              <div class="field col-4 mx-auto py-2 border-primary">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control rounded-0 border border-2 border-dark" %>
+              </div>
+                
+            </div>
+            <div class="text-center">
+              <div class="field col-4 mx-auto py-2">
+                <%= f.label :Mot_de_passe %><br />
+                <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+              </div>
+              <% if devise_mapping.rememberable? %>
+                  <div class="field">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :se_souvenir_de_moi %>
+                  </div>
+              <% end %>
+            </div>
+        <div class="text-center">
+           <div class="actions col-4 mx-auto py-2">
+               <%= f.submit "Connexion", class: "rounded-0 btn bg-gradient-primary w-100" %>
+           </div>
+              <% end %>
+        </div>  
+              
+      </div>
+          <form>
+              <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+              <%= render "devise/shared/links" %>
+              </div>
+          </form>          
+     </div>
+
+          </div>
+        </div>
+     </div>
+
+
+
+

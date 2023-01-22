@@ -1,0 +1,43 @@
+<%= form_with(model: article) do |form| %>
+  <% if article.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(article.errors.count, "error") %>
+        prohibited this article from being saved:</h2>
+
+      <ul>
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="bg-white container pt-5 pb-2 border border-2 border-dark card-box">
+  <div class="col-4 mx-auto py-3 px-5 mb-4 bg-white border border-2 border-dark">
+    <%= form.label :"Titre de l'annonce", style: "display: block" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="col-4 mx-auto py-3 px-5 mb-4 bg-white border border-2 border-dark">
+    <%= form.label :"Description de l'article", style: "display: block" %>
+    <%= form.text_area :content, class: "form-control" %>
+  </div>
+  <div class="col-4 mx-auto py-3 px-5 mb-4 bg-white border border-2 border-dark">
+    <%= form.label :Prix, style: "display: block" %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div class="col-4 mx-auto py-3 px-5 mb-4 bg-white border border-2 border-dark">
+    <%= form.label :"Choisissez une catégorie" %><br>
+    <%= form.select :typeofgame, options_for_select(Article.typeofgames.map {|key, value| [key.titleize, Article.typeofgames.key(value)]}, article.typeofgame) %>
+  </div>
+
+  <div class="col-4 mx-auto py-3 px-5 mb-4 bg-white border border-2 border-dark">
+    <%= form.label :"Modèle de Console" %><br>
+    <%= form.select :console, options_for_select(Article.consoles.map {|key, value| [key.titleize, Article.consoles.key(value)]}, article.console) %>
+  </div>
+
+  <div class="col-4 mx-auto py-3 px-5 mb-4">
+    <%= form.submit "Création article", class:"btn bg-gradient-primary rounded-0 w-100" %>
+  </div>
+<% end %>
+</div>

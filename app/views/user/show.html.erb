@@ -1,0 +1,27 @@
+<div>
+
+    <%= render "form/user/show" %> <!-- A modifier -->
+    <div class="container">
+     <h3 class="pb-3 pt-3">Commentaires<h3>
+    <% @user.thecomments.each do |thecomment|%>
+        <% if thecomment.title.class == NilClass %>
+        <% else %>
+            <div class="container py-5 card mb-3 border border-2 border-dark">
+                <div class="row">
+                    <div class="col-2">               
+                        <img src="https://cdn-icons-png.flaticon.com/128/1747/1747273.png" width="70" class="rounded-circle mt-2">           
+                    </div>           
+                    <div class="col-10">              
+                        <div class="comment-box ml-2 display-6">                  
+                            <h4><%= thecomment.title%></h4>
+                            <div class="text-dark">
+                                <p><%= thecomment.text%></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+    </div>
+</div>

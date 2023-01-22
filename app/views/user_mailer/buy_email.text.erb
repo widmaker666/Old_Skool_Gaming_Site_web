@@ -1,0 +1,13 @@
+Bonjour <%= @user.first_name %> <%= @user.last_name%> et merci pour votre commande !
+
+    ==========================================================
+
+    Voici ce que tu as acheté : <%= @order.articles.each %>.
+
+    si tu souhaites envoyer un message à ton acheteur: <%= @user %>.
+
+
+    Pour accéder à ton espace client, connecte-toi via : <%= @url %>.
+
+
+    À très vite sur oldschoolgaming.fr !

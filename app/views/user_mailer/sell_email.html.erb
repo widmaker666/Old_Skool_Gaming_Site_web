@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' /> 
+    </head>
+    <body>
+        <h1>Salut <%= @user.first_name %> <%= @user.last_name%> </h1>
+        <p>Voici ce que tu as vendu : 
+        <% @order.articles.each do |articles| %>.
+        
+        <% if @user = articles.seller %>
+
+        <%= articles.title %>
+        
+        <% end %>
+
+        <%end%>
+        </p>
+        <p>
+        Pour accéder à ton espace client, connecte-toi via : <%= @url %>.
+        </p>
+        <p> À très vite sur oldschoolgaming.fr !
+    </body>
+    </html>

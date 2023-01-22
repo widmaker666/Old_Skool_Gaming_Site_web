@@ -1,0 +1,41 @@
+<!-- Ne pas afficher l'article si article.buyer est différent de nil (Donc s'il a été acheté) -->
+<!-- if article.buyer != nil -->
+
+
+    <!-- Le code ici a pour but de ne montrer que les articles que l'on recherche grace aux filtres 
+          Parameters: {"console"=>"PS1", "typeofgame"=>"Console"}  Ce qui signifie, si aucun filtre n'existe, donc on affiche tout
+          else   Si on rentre dans la condition else, cela signifie qu'il y a un filtre, dans ce cas on affiche pas tout -->
+      <div class="col-md-6 col-lg-3 pb-5">
+      <div class="cardos border border-2 border-dark zoom rounded-0" style="width: 15rem;">
+        <div class="fw-bold text-dark">
+          <%= article.title %>
+
+        </div>
+        
+        <% if article.console == "SEGA" && current_user %>
+        <%= link_to image_tag("http://atlas-content-cdn.pixelsquid.com/stock-images/nintendo-nes-console-game-xwVG4NC-600.jpg", size: "200x300"), article_path(article) %>
+        <% elsif article.console == "PS1" && current_user %>
+        <%= link_to image_tag("https://atlas-content-cdn.pixelsquid.com/assets_v2/193/1936372297870873864/jpeg-600/G03.jpg?modifiedAt=1", size: "200x300"), article_path(article) %>
+        <% elsif article.console == "SNES" && current_user %>
+        <%= link_to image_tag("http://atlas-content-cdn.pixelsquid.com/stock-images/super-nintendo-snes-kovW238-600.jpg", size: "200x300"), article_path(article) %>
+        <% else %>
+        <%= link_to image_tag("http://atlas-content-cdn.pixelsquid.com/stock-images/nintendo-nes-console-game-xwVG4NC-600.jpg", size: "200x300"), new_user_registration_path %>
+        <% end %>
+        
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <div class="clearfix mb-3">
+              <% if article.console == "SEGA" %>
+              <span class="float-start badge rounded-pill bg-primary"><%= article.console %></span>
+              <% elsif article.console == "SNES" %>
+              <span class="float-start badge rounded-pill bg-danger"><%= article.console %></span>
+              <% elsif article.console == "PS1" %>
+              <span class="float-start badge rounded-pill bg-dark"><%= article.console %></span>
+              <% end %>
+              <span class="float-end price-hp fw-bold text-dark "><%= article.price %> €</span>
+              
+            </div>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,74 @@
+<% if flash[:error] %>
+  <div class="notice", style="color: red"><%= flash[:error] %></div>
+<% end %>
+
+<% if current_user.nil? %>
+<%= render "form/header/header" %>
+<% elsif current_user %>
+<section class="bg-mainos">
+  <div class="container pt-5 pb-5">
+    <div class="card">
+      <div class="card-body rounded-0 border border-2 border-dark card-box">
+        <p class="lead text-dark">Besoin d'astuces ?</P>
+          <div class="d-flex flex-column flex-lg-row justify-content-between text-center align-items-center">
+        <p>Pensez à ajouter un avatar sur votre profil pour gagner en visibilité.</p>
+        <%= link_to "Personnaliser", user_path(current_user), class: "btn btn-lg btn-primary rounded-0" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>
+
+<% if current_user %>
+<%= render partial: "form/article/example", locals: { articles: @articles } %>
+<% end %>
+
+      <!-- Partie filtre -->
+      <% if current_user.nil? %>
+      <section class="bg-white pt-5 border-bottom border-2 border-dark">
+        <% else %>
+        <section class="bg-mainos pt-5 ">
+          <% end %>
+      <div class="container d-flex justify-content-center align-items-end">
+          <div class="card mb-5">
+            <div class="card-body rounded-0 border border-2 border-dark card-box">
+          <p class="lead text-dark ombre"> Quel type de console recherchez-vous ?</p>
+        <%= form_with url: "/articles", method: :get do |form| %>
+            <p>Type de console</p>
+            <%= form.select :console, options_for_select(Article.consoles.map { |key, value| [key.titleize, Article.consoles.key(value)] }) %> <br />
+
+	          <p>Etat de la console</p>
+            <div class="d-flex justify-content-between">
+            <%= form.select :typeofgame, options_for_select(Article.typeofgames.map { |key, value| [key.titleize, Article.typeofgames.key(value)] }) %>
+            
+	    <%= form.submit "Rechercher", class:"btn btn-primary rounded-0" %>
+    </div>
+
+        <% end %>
+      </div>
+        </div>
+        <div class="mb-3 d-none d-lg-block">
+            
+              <%= image_tag "game.png", style: "height: 300px;" %>
+      </div>
+      
+      </section>
+
+<section class="bg-mainos">
+<div class="container ">
+  <div class="row ">
+    <p class="lead text-dark pt-5">Fil d'actu</p>
+    <% @articles.each do |article| %>
+    
+      <% if article.buyer != nil %>
+      <% elsif params.include?(:console) == false && params.include?(:typeofgame) == false %> <!-- Si y'a aucun filtre -->
+        <%= render partial: "form/article/allarticle", locals: { article: article } %>
+      <% elsif article.console == params[:console] || article.typeofgame == params[:typeofgame] %> <!-- Si y'a un filtre -->
+        <%= render partial: "form/article/allarticle", locals: { article: article } %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+</section>

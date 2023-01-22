@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+  <head>
+    <title>Oldskoolgaming</title>
+    <!-- Primary Meta Tags -->
+<title>Oldskoolgaming</title>
+<meta name="title" content="Oldskoolgaming">
+<meta name="description" content="Achat et vente de consoles vintage. Produits rares et communauté de connaisseurs qui ne laissent pas passer les arnaques. ">
+
+<link rel="icon" type="image/png" href="https://i.ibb.co/rwnKW3z/Sans-titre.png" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scholdskoolgaming.fly.dev/">
+<meta property="og:title" content="Oldskoolgaming">
+<meta property="og:description" content="Achat et vente de consoles vintage. Produits rares et communauté de connaisseurs qui ne laissent pas passer les arnaques. ">
+<meta property="og:image" content="https://www.canva.com/design/DAFVMsUIVJ0/0gXpz8xsDszX_8jxdm7-tw/edit?utm_content=DAFVMsUIVJ0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://scholdskoolgaming.fly.dev/">
+<meta property="twitter:title" content="Oldskoolgaming">
+<meta property="twitter:description" content="Achat et vente de consoles vintage. Produits rares et communauté de connaisseurs qui ne laissent pas passer les arnaques. ">
+<meta property="twitter:image" content="https://www.canva.com/design/DAFVMsUIVJ0/0gXpz8xsDszX_8jxdm7-tw/edit?utm_content=DAFVMsUIVJ0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+  </head>
+
+  <body>
+    <%= render "form/navbar/navbar" %>
+    <main role="main">
+    <%= yield %>
+  </main>
+    <%= render "form/header/footer" %>
+    <!-- JavaScript Bundle with Popper -->
+    <script type="text/javascript">
+      
+$(document).ready(function(){
+  $(window).scroll(function(){
+    var scroll = $(window).scrollTop();
+    if (scroll > 300) {
+      $(".black").css("background" , "blue");
+    }
+
+    else{
+      $(".black").css("background" , "#333");   
+    }
+  })
+})
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>

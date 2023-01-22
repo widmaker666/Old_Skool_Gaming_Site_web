@@ -1,0 +1,102 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render "form/article/show" %>
+
+<!-- ici la section des boutons modifier article/revenir/supprimer -->
+<section>
+  <div class="container py-0">
+    <div class="d-flex align-items-center justify-content-center p-5 mb-4 bg-white rounded-0 border border-2 border-dark">
+      <div class="container py-5">
+        <h1 class="display-5 bg-dark text-white fw-bold border border-2 border-dark p-3 text-center"><%= @article.title %></h1>
+        <p class="border border-2 border-dark p-3 text-dark"><%= @article.content %></p>
+        <p><%= @article.console %> | <%= @article.typeofgame %></p>
+
+      </div>
+      <div class="container py-5 d-flex align-items-center justify-content-center d-none d-md-block">
+        <%= image_tag("http://atlas-content-cdn.pixelsquid.com/stock-images/nintendo-nes-console-game-xwVG4NC-600.jpg", size: "200x300")%>
+      </div>
+    </div>
+
+    <div class="row align-items-start justify-content-center">
+      <% if current_user == @article.seller %>
+        <div class="col-md-4">
+          <div class="h-100 p-5 text-white bg-dark rounded-0 border border-2 border-dark d-flex row mb-4">
+            <p class="lead text-white pb-3">Besoin de faire des modifications ?</p>
+            <div class="text-center">
+              
+            <%= link_to "Modifier l'article", edit_article_path(@article), class:"btn btn-outline-secondary border-2 rounded-0" %>
+          
+          
+            <%= button_to "Supprimer l'article", @article, method: :delete, class:"btn btn-secondary text-dark rounded-0" %>
+          </div>
+          </div>
+
+        </div>
+      <% else %>
+        <div class="col-md-4">
+          <div class="h-100 p-5 text-white bg-dark rounded-0 border border-2 border-dark d-flex row mb-4">
+            <p class="lead text-white pb-3">Pensez à laisser un commentaire si vous aimez le produit :)</p>
+            <% if current_user %>
+<div class="commentaire d-none" >
+<%= render partial: "thecomments/form",  locals: {article: @article} %>
+</div>
+
+<div class="d-flex justify-content-center container border border-2 border-dark mx-auto">
+<%= link_to "Commenter", nil , remote: true, class: "btn btn-outline-secondary border-2 rounded-0", data: { controller: "comments", action: "comments#toggleForm"} %>
+<% end %>
+</div>
+          </div>
+
+
+        </div>
+      <% end %>
+      
+
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-white border rounded-0 border border-2 border-dark">
+
+          <p class="lead fw-bold border-bottom border-2"><%= @article.price %> €</p>
+          <p class="border-bottom border-2">
+          Pour tout achat effectué par le biais du bouton "Payer", nous appliquons des frais couvrant notre protection acheteurs. Cette protection acheteurs comprend notre <%= link_to "Politique de remboursement", cgv_path %>.
+          </p> 
+          <p>
+            Marque: <%= @article.console %>
+          </p>
+          <p>
+            État: <%= @article.typeofgame %>  
+          </p>
+          <p class="border-bottom border-2">
+            Paiement: VISA
+          </p>
+          <% if current_user %>
+            <% if current_user != @article.seller %>
+                <% if @artcartuser.class == NilClass %>
+                  <%= button_to "Mettre dans le caddie", user_carts_path(current_user, article: @article.id), method: :create, class:"btn btn-primary rounded-0" %>
+              <% else%>
+                  <%= link_to "Mon panier", user_carts_path(current_user), class: "text-dark" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bg-mainos">
+  <div class="container ">
+    <div class="row ">
+      <p class="lead text-dark pt-5">Articles de ce vendeur</p>
+      <div class="d-flex row">
+        <% @articles.each do |article| %>
+          <!-- Seul les articles vendu et dont le proprio est l'utilisateur de la page
+          seront visibles-->
+          <% if article.buyer == nil %>
+                    <%= render partial: "form/article/exampleform", locals: { article: article } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<%= form_with url: "/comments", method: :post do |form| %>
+
+  <%= hidden_field_tag :article_id, params[:id] %>
+  <%= hidden_field_tag :commentable_id, params[:id] %>
+  <%= hidden_field_tag :commentable_type, "Article" %>
+
+  <h6><%= form.label :title, "Titre du commentaire" %></h6>
+  <%= form.text_field :title %><br>
+
+  <h6><%= form.label :content, "Commentaire" %></h6>
+  <%= form.text_area :content %>
+  <br>
+  <%= form.submit "Envoyer" %>
+<% end %>

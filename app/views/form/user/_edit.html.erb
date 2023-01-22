@@ -1,0 +1,97 @@
+<div class="container bg-white pt-5 pb-5 border border-2 border-dark rounded-0">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img pb-5">
+                            <%if @user.avatar.attached?%> 
+                                <%= image_tag @user.avatar, alt: 'avatar' %>
+                            <% else %>
+                            <img src="https://media.istockphoto.com/id/1307387607/vector/anonymous-vector-icon-incognito-sign-privacy-concept-human-head-with-glitch-face-personal.jpg?s=612x612&w=0&k=20&c=gABTCg7-xeCyeWDF-JnNzPbpnCeTX8wH-TxIYdkC0yQ=" alt=""/>
+                            <% end %>
+                            <div class="pt-3">
+                            <%= form_with url: user_avatars_path(@user), multipart: true do |form| %> 
+                                <%= form.file_field :avatar, class:"btn btn-outline-dark rounded-0 border-2" %>
+                                <%= submit_tag "mettre à jour", class:"btn btn-primary rounded-0" %>
+                            <% end %>
+                            </div>
+                        </div>
+                        <%= form_with url: "/modifications/#{@user.id}", method: :patch do |form| %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        <%= @user.first_name %> <%= @user.last_name %>
+                                    </h5>
+                                    <h6>
+                                        <%= @user.email %>
+                                    </h6>                                 
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <%= form.submit "Editer", :class => "profile-edit-btn" %>
+                    </div>
+                </div>
+                
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>ID User</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= @user.id %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>Prénom</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p> <%= @user.first_name%>
+                                                <%= form.text_field :first_name, class:"form-control border-dark" %></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>Nom</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= @user.last_name %>
+                                                <%= form.text_field :last_name, class:"form-control border-dark"%></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>Email</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= @user.email %>
+                                                <%= form.email_field :email, class:"form-control border-dark"%></p>
+                                            </div>
+                                        </div>                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>Description</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><%= @user.description %>
+                                                <%= form.text_area :description, size: "30x3", class:"form-control border-dark" %> </p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                          <div class="d-flex align-items-center">
+                                        <%= form.submit "Modifier", :class => "btn btn-primary rounded-0" %>
+                                    
+                                    </div>       
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        <% end %>

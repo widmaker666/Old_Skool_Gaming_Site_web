@@ -1,0 +1,99 @@
+<div class="px-4 px-lg-0 bg-mainos2">
+
+  <div class="container text-white py-5 text-center">
+    <h1 class="display-4">Ton panier</h1>
+  </div>
+
+  <div class="pb-5">
+    <div class="container ">
+    
+      <div class="row">
+      
+        <div class="col-lg-12 p-5 bg-white rounded-0 border border-2 border-dark  mb-5 card-box ">
+          <!-- Shopping cart table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Produits</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Prix</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Quantité</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Effacer</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @cart.articles.each do |article| %>
+                  <tr>
+                    <th scope="row" class="border-0">
+                      <div class="p-2">
+                        <%= image_tag article.images[0], class: "img-fluid rounded  shadow-sm", width: "70rem" if article.images.attached? %>
+                        <div class="ml-3 d-inline-block align-middle">
+                          <h5 class="mb-0">
+                            <%= link_to article.title, article_path(article) %></h5>
+                            
+                        </div>
+                      </div>
+                    </th>
+                    <td class="border-0 align-middle"><strong><%= article.price %>
+                        €</strong></td>
+                    <td class="border-0 align-middle"><strong>1</strong></td>
+                    <td class="border-0 align-middle"><%= button_to "X", user_cart_path(current_user, current_user.cart, article_id: article.id), method: :delete, class: "btn btn-outline-dark border-2 rounded-0 w-auto me-1 mb-0" %></td>
+                  </tr>
+                <% end %>
+
+              </tbody>
+            </table>
+          
+          </div>
+          <!-- End -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-flex ">
+      <div class=" py-5 p-4 bg-white rounded-0 border border-2 border-dark mx-auto px-auto card-box">
+        <div class="col-lg-10">
+
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Règlement du panier
+          </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">Récapitulatif du panier prêt à payer.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h5 class="font-weight-bold"><%= @cart.total %>
+                  €</h5>
+              </li>
+            </ul><%= form_tag orders_path do %>
+              <article>
+                <% if flash[:error].present? %>
+                  <div id="error_explanation">
+                    <p><%= flash[:error] %></p>
+                  </div>
+                <% end %>
+              </article>
+              <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-description="Achat d'un produit"
+                data-amount="<%= @cart.total * 100 %>"
+                data-label="Payer"
+                data-locale="auto"
+              >
+              </script>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+</div>
+  </div>
+</div>
